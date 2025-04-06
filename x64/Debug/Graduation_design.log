@@ -1,0 +1,37 @@
+﻿  File_processing.cpp
+E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
+  Result_generation.cpp
+E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
+  data_tructure.cpp
+E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
+  main.cpp
+E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
+  string_matching .cpp
+E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
+E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
+  正在生成代码...
+  Graduation_design.vcxproj -> E:\毕业设计\Graduation_design\x64\Debug\Graduation_design.exe
