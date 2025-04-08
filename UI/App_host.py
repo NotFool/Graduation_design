@@ -75,5 +75,19 @@ def download_file():
         return jsonify({'code': 1, 'message': '文件不存在'}), 404
     return send_from_directory(PROCESSED_FOLDER, filename, as_attachment=True)
 
+@app.route('/api/clear', methods=['POST'])
+def clear_files():
+    try:
+        # 删除上传目录和处理目录中的所有文件
+        for folder in [UPLOAD_FOLDER, PROCESSED_FOLDER]:
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+        return jsonify({'code': 0, 'message': '清理成功'})
+    except Exception as e:
+        return jsonify({'code': 1, 'message': '清理失败: ' + str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)
