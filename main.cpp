@@ -26,16 +26,27 @@ int main() {
 	}
 	
 	//获取需要进行匹配的字符串
-	char target_word[MAX_TOKEN_LENGTH];
-	char* Target_words[MAX_TOKENS];
-	scanf("%s", target_word);
-	char stop[] = "NULL";
+	//char target_word[MAX_TOKEN_LENGTH];
+	char** Target_words= (char**)malloc(16 * sizeof * Target_words);
+	//scanf("%s", target_word);
+	//char stop[] = "NULL";
 	int num = 0;
-	while (strcmp(target_word,stop) != 0) {
+	//while (strcmp(target_word,stop) != 0) {
 		//printf("%s\n", target_word);
-		record_target_words(Target_words,target_word,num++);
-		scanf("%s", target_word);
+		//record_target_words(Target_words,target_word,num++);
+		//scanf("%s", target_word);
+	//}
+	char filepath[1024];
+	printf("Enter JSON file path: ");
+	if (scanf("%1023s", filepath) != 1) {
+		printf("Failed to read file path\n");
 	}
+	FILE* fp = fopen(filepath, "rb");
+	if (!fp) {
+		printf("fopen失败\n");
+	}
+	fseek(fp, 0, SEEK_END);
+	JSON_pro(fp, Target_words, &num);
 	//print_words(Target_words, num);
 
 	//将待对比字符跟关键字链表进行对比，匹配成功修改flag

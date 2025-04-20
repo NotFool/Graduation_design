@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Character_storage.cpp" />
+    <ClCompile Include="cJSON.c" />
     <ClCompile Include="data_tructure.cpp" />
     <ClCompile Include="File_processing.cpp" />
     <ClCompile Include="main.cpp" />
@@ -136,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character_storage.h" />
+    <ClInclude Include="cJSON.h" />
     <ClInclude Include="data_structure.h" />
     <ClInclude Include="file_processing.h" />
     <ClInclude Include="Result_generation.h" />

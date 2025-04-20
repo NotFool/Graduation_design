@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "file_processing.h"
 #include "data_structure.h"
+#include "cJSON.h"
 #pragma warning(disable:4996) 
 
 //判断是不是算数运算符
@@ -88,4 +89,84 @@ int file_get(char* filename, Row_data** head) {
 	//关闭文件，正常结束返回值为1
 	fclose(file);
 	return 1;
+}
+
+//比较是否存在重复关键变量
+int cmpstr(const void* a, const void* b) {
+	return strcmp(*(char**)a, *(char**)b);
+}
+
+void JSON_pro(FILE* file,char** keyword,int* len) {
+	//读取整个文件放入内存以方便进一步处理
+	long size = ftell(file);
+	rewind(file);
+
+	char* buff = (char*)malloc(size + 1);
+	if (!buff) {
+		printf("读取JSON文件进入缓冲区失败！\n");
+		free(buff);
+		return;
+	}
+
+	fread(buff, 1, size, file);
+	buff[size] = '\0';
+
+	//解析JSON文件
+	cJSON* root = cJSON_Parse(buff);
+	if (!root) {
+		printf("JSON parse error before: %s\n", cJSON_GetErrorPtr());
+		free(buff);
+	}
+	free(buff);
+
+	//动态数组初始化
+	size_t cap = 16;
+
+	//提取关键变量
+	cJSON* item;
+	if (cJSON_IsArray(root)) {
+		cJSON_ArrayForEach(item, root) {
+			cJSON* kv = cJSON_GetObjectItemCaseSensitive(item, "key_variable");
+			if (cJSON_IsString(kv) && kv->valuestring) {
+				if (*len == cap) {
+					cap *= 2;
+					keyword = (char**)realloc(keyword, cap * sizeof * keyword);
+					if (!keyword) {
+						printf("分配关键变量空间失败！\n");
+						cJSON_Delete(root);
+					}
+				}
+				keyword[(*len)++] = strdup(kv->valuestring);
+			}
+		}
+	}
+	else if (cJSON_IsObject(root)) {
+		cJSON* kv = cJSON_GetObjectItemCaseSensitive(root, "key_variable");
+		if (cJSON_IsString(kv) && kv->valuestring) {
+			keyword[(*len)++] = strdup(kv->valuestring);
+		}
+	}
+	cJSON_Delete(root);
+
+	//去重
+	size_t write_idx = 0;
+	for (size_t read_idx = 0; read_idx < *len; ++read_idx) {
+		int is_dup = 0;
+		/* 检查是否在 keyword[0..write_idx-1] 中出现过 */
+		for (size_t j = 0; j < write_idx; ++j) {
+			if (strcmp(keyword[read_idx], keyword[j]) == 0) {
+				is_dup = 1;
+				break;
+			}
+		}
+		if (!is_dup) {
+			/* 将新元素移动到 write_idx 位置 */
+			keyword[write_idx++] = keyword[read_idx];
+		}
+		else {
+			/* 释放重复字符串内存 */
+			free(keyword[read_idx]);
+		}
+	}
+	*len = write_idx;
 }
