@@ -48,7 +48,7 @@ int main() {
 	fseek(fp, 0, SEEK_END);
 	JSON_pro(fp, Target_words, &num);
 	//print_words(Target_words, num);
-
+	fclose(fp);
 	//将待对比字符跟关键字链表进行对比，匹配成功修改flag
 	int count = 0;
 	while (count < num) {

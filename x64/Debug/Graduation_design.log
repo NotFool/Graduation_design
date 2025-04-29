@@ -5,13 +5,6 @@ E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “type
 E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
 E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
 E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
-E:\毕业设计\Graduation_design\File_processing.cpp(171,9): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
-  main.cpp
-E:\毕业设计\Graduation_design\data_structure.h(6,2): warning C4091: “typedef ”: 没有声明变量时忽略“keyword”的左侧
-E:\毕业设计\Graduation_design\data_structure.h(6,11): warning C4091: “”: 没有声明变量时忽略“keyword”的左侧
-E:\毕业设计\Graduation_design\data_structure.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“opera”的左侧
-E:\毕业设计\Graduation_design\data_structure.h(12,9): warning C4091: “”: 没有声明变量时忽略“opera”的左侧
-E:\毕业设计\Graduation_design\data_structure.h(22,2): warning C4091: “typedef ”: 没有声明变量时忽略“Row_data”的左侧
-E:\毕业设计\Graduation_design\data_structure.h(22,12): warning C4091: “”: 没有声明变量时忽略“Row_data”的左侧
-  正在生成代码...
+E:\毕业设计\Graduation_design\File_processing.cpp(30,21): warning C4129: “ ”: 不可识别的字符转义序列
+E:\毕业设计\Graduation_design\File_processing.cpp(230,9): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
   Graduation_design.vcxproj -> E:\毕业设计\Graduation_design\x64\Debug\Graduation_design.exe

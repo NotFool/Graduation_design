@@ -27,7 +27,7 @@ bool is_opera(char* s) {
 //按行处理文件内容，提取出其中的关键字，返回值为当前行字符串个数
 int data_get(char* line,char strings[MAX_TOKENS][MAX_TOKEN_LENGTH]) {
 	char* tokens[1000];
-	char deliniters[] =" (), \n";
+	char deliniters[] =" (), \ {}[]!#&*+-> \n";
 	int count = 0;
 
 	//以空格为单位获取字符串
@@ -96,6 +96,22 @@ int cmpstr(const void* a, const void* b) {
 	return strcmp(*(char**)a, *(char**)b);
 }
 
+/* strndup自实现 */
+static size_t my_strnlen(const char* s, size_t maxlen) {
+	size_t i;
+	for (i = 0; i < maxlen && s[i]; ++i);
+	return i;
+}
+
+static char* my_strndup(const char* s, size_t n) {
+	size_t len = my_strnlen(s, n);
+	char* dup = (char*)malloc(len + 1);
+	if (!dup) return NULL;
+	memcpy(dup, s, len);
+	dup[len] = '\0';
+	return dup;
+}
+
 void JSON_pro(FILE* file,char** keyword,int* len) {
 	//读取整个文件放入内存以方便进一步处理
 	long size = ftell(file);
@@ -128,22 +144,65 @@ void JSON_pro(FILE* file,char** keyword,int* len) {
 		cJSON_ArrayForEach(item, root) {
 			cJSON* kv = cJSON_GetObjectItemCaseSensitive(item, "key_variable");
 			if (cJSON_IsString(kv) && kv->valuestring) {
-				if (*len == cap) {
-					cap *= 2;
-					keyword = (char**)realloc(keyword, cap * sizeof * keyword);
-					if (!keyword) {
-						printf("分配关键变量空间失败！\n");
-						cJSON_Delete(root);
+				char* s = kv->valuestring;
+				char* arrow = strstr(s, "->");
+				if (arrow) {
+					/* 拆分 "name->word" 为两部分 */
+					size_t name_len = arrow - s;
+					char* name = my_strndup(s, name_len);
+					char* word = strdup(arrow + 2);
+					/* 确保容量 */
+					for (int k = 0; k < 2; ++k) {
+						if (*len + 1 > cap) {
+							cap *= 2;
+							char** tmp = (char**)realloc(keyword, cap * sizeof * keyword);
+							if (!tmp) {
+								printf("Memory allocation failed\n");
+								/* 释放已分配内存 */
+								free(name);
+								free(word);
+								cJSON_Delete(root);
+								for (size_t i = 0; i < *len; ++i) free(keyword[i]);
+								free(keyword);
+								return;
+							}
+							keyword = tmp;
+						}
+						keyword[(*len)++] = (k == 0 ? name : word);
 					}
 				}
-				keyword[(*len)++] = strdup(kv->valuestring);
+				else {
+					/* 普通字符串，直接复制 */
+					if (*len + 1 > cap) {
+						cap *= 2;
+						char** tmp = (char**)realloc(keyword, cap * sizeof * keyword);
+						if (!tmp) {
+							printf("Memory allocation failed\n");
+							cJSON_Delete(root);
+							for (size_t i = 0; i < *len; ++i) free(keyword[i]);
+							free(keyword);
+							return ;
+						}
+						keyword = tmp;
+					}
+					keyword[(*len)++] = strdup(s);
+				}
 			}
 		}
 	}
 	else if (cJSON_IsObject(root)) {
 		cJSON* kv = cJSON_GetObjectItemCaseSensitive(root, "key_variable");
 		if (cJSON_IsString(kv) && kv->valuestring) {
-			keyword[(*len)++] = strdup(kv->valuestring);
+			char* s = kv->valuestring;
+			char* arrow = strstr(s, "->");
+			if (arrow) {
+				size_t name_len = arrow - s;
+				keyword[(*len)++] = my_strndup(s, name_len);
+				keyword[(*len)++] = strdup(arrow + 2);
+			}
+			else {
+				keyword[(*len)++] = strdup(s);
+			}
 		}
 	}
 	cJSON_Delete(root);
